@@ -2,7 +2,7 @@
 
 PortSystem          1.0
 PortGroup           github 1.0
-PortGroup           java 1.0
+PortGroup           gradle 1.0
 PortGroup           app 1.0
 
 github.setup        NationalSecurityAgency ghidra 12.1.4 Ghidra_ _build
@@ -24,7 +24,7 @@ java.version        25
 java.fallback       openjdk25-zulu
 
 universal_variant   no
-depends_build-append    port:gradle port:py314-pip port:python314
+depends_build-append    port:py314-pip port:python314
 depends_run-append      port:python314
 
 set javadest        ${prefix}/share/java/${name}-${version}
@@ -40,13 +40,13 @@ pre-configure {
 configure.env-append    PATH=${workpath}/bin:$env(PATH)
 build.env-append        PATH=${workpath}/bin:$env(PATH)
 
-configure.env-append    GRADLE_USER_HOME=${worksrcpath}
-configure.pre_args  ""
-configure.cmd       gradle -I gradle/support/fetchDependencies.gradle
-build.env-append    GRADLE_USER_HOME=${worksrcpath}
+gradle.init_scripts gradle/support/fetchDependencies.gradle
+gradle.build_tasks  buildGhidra
+
 build.env-append    _JAVA_OPTIONS=-Duser.home=${worksrcpath}
-build.cmd           gradle -x FileFormats:extractSevenZipNativeLibs
-build.target        buildGhidra
+build.args          -x FileFormats:extractSevenZipNativeLibs
+
+test.run            no
 
 set ghidra_copy_list \
 [list \
