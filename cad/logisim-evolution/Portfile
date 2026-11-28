@@ -4,7 +4,7 @@ PortSystem          1.0
 PortGroup           java 1.0
 PortGroup           github 1.0
 
-github.setup        logisim-evolution logisim-evolution 5.0.0 v
+github.setup        logisim-evolution logisim-evolution 5.1.0 v
 github.tarball_from archive
 revision            0
 
@@ -21,14 +21,14 @@ depends_build-append \
 depends_lib-append  port:commons-cli \
                     port:commons-lang3 \
                     port:commons-text \
-                    port:hamcrest \
                     port:slf4j
+depends_test-append port:hamcrest
 
 set gradle_home     ${workpath}/.home/.gradle
 
-checksums           rmd160  8d118223fb885cc720168e1dc6fd957343a5e145 \
-                    sha256  f988340da25e65ae3e8e8b29e6b16b4014661ed730a8952fc5c618337828f9ca \
-                    size    47777810
+checksums           rmd160  36912460b86d632b70f2e99176b60e537f19d69e \
+                    sha256  613de40d98b0992ea1b3ab2560302de1a299e62d432acb91f0221f6958664e25 \
+                    size    48111428
 
 java.version        21+
 
